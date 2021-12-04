@@ -1,0 +1,16 @@
+﻿<krpano>
+	
+	<!--
+		contextmenu.xml
+		krpano 1.20.9
+		
+		A helper script for changing the mouse-control-mode and the 
+		viewing projections via the context-menu.
+	-->
+	
+
+	<contextmenu fullscreen="false" versioninfo="false">
+		<item name="d" caption="Visit Website" onclick="openurl('https://sg360tour.wixsite.com/website')"/>
+	</contextmenu>
+
+</krpano>

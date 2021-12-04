@@ -1,0 +1,878 @@
+<krpano modelPath="%VIEWER%/assets/model3d/model.obj" logkey="false" showerrors="false" >
+  <display depthmaprendermode="3dmodel" />
+  <display depthbuffer="true" />
+  <!-- <display depthmaprendermode="depthmap" /> -->
+  <!-- 
+    
+    depthmaprendermode:
+	    - "depthmap" (default)
+            - generates an internal 24bit depthmap image
+            - fastest to load
+            - no "holes", everything is "connected/filled"
+            - not perfectly accurate
+	    - "3dmodel"
+            - uses the 3d model and maps the pano onto it
+            - slower because the 3d model internally needs to get sub-divided into many small triangles
+    -->
+
+    <include url="plugins/combobox.xml" />
+  <include url="plugins/circle_hotspots.xml" />
+  <include url="plugins/swipe_gallery.xml" />
+
+
+
+
+  
+
+
+
+
+  <control keycodesin="16" keycodesout="17" />
+
+  
+
+
+  <!--  if(step == 2, loadscene(scene_a2, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND);lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,3); );
+    if(step == 3, loadscene(scene_a3, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,4); );
+    if(step == 4, loadscene(scene_a4, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,5); );
+    if(step == 5, loadscene(scene_a5, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,6); );
+    if(step == 6, loadscene(scene_a6, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,7); );
+    if(step == 7, loadscene(scene_a7, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,8); );
+    if(step == 8, loadscene(scene_a8, null, MERGE, SLIDEBLEND(1.0, 0.0, 0.2, linear) ); wait(BLEND); lookto(calc(get(view.hlookat)+320), 0,150, linear(4), false); set(step,1); autorun(); ); -->
+
+  <!-- <script type="text/javascript" src="js/jquery/jquery-1.5.1.min.js"> </script>
+  <script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.1.pack.js"></script>
+  <link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.1.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  function openPopup(t,linktourl,w,h,type)
+  {
+  $.fancybox({
+  'title' : t,
+  'width' : w,
+  'height' : h,
+  'href' : linktourl,
+  'type' : type,
+  'autoScale' : 'true',
+  'overlayColor' : '#000000',
+  'overlayAlpha' : '0.3'
+  });
+  }
+  </script> -->
+
+  <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
+  <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+  <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <script type="text/javascript">
+
+  function openPopup(t,linktourl,w,h,type)
+  {
+  $.fancybox({
+  'title' : t,
+  'width' : w,
+  'height' : h,
+  'href' : linktourl,
+  'type' : type,
+  'autoScale' : 'true',
+  'overlayColor' : '#000000',
+  'overlayAlpha' : '0.3'
+  });
+  }
+  </script> -->
+
+<!--  <layer name="autotour_con2" keep="true"
+    type="container"
+    width="320"
+    height="320"
+    align="center"
+    style="tooltip"
+      tooltip="autotour"
+    y = "-50"
+    x = "-100"
+  >
+
+
+  <layer name="autotourbtn2"  url="plugins/onoff.png" align="center" x="0" y="0" alpha="0.25" scale="0.05" onover="tween(alpha,1);" onout="tween(alpha,0.25);"
+         crop="0|0|980|490"
+         
+         onclick="change(); closemap(); show_gallery(gallery1);"
+  />
+  </layer> -->
+
+  <!-- onclick="change(); closemap();popup('image', 'panos/a1.tiles/1.jpg','panos/a1.tiles/2.jpg');" -->
+
+ <!-- onclick="popup('iframe', 'plugins/test.pdf', '', 300, 600, true);" -->
+  <!-- onclick="js(openPopup('a title', 'plugins/test.pdf', 500, 500, 'iframe'))" -->
+<!-- onclick="popup('iframe', 'https://www.bing.com/maps', '', 800, 600, true);" -->
+<!-- onclick="change(); closemap(); popup('iframe', 'https://sg360tour.wixsite.com/website/services-5', '', 3000, 900, true);" -->
+<!-- onclick="change(); closemap(); popup('iframe', 'plugins/nearby-2.pdf', '', 3000, 900, true);" -->
+
+    <action name="xckvjxlkcjvoisdjijfw" scope="local" args="framewidth, frameheight, framerate">
+    <!-- define local variables -->
+    calc(local.xframes, (caller.imagewidth /framewidth) BOR 0);
+    calc(local.frames, xframes * ((caller.imageheight / frameheight) BOR 0));
+    def(local.frame, integer, 0);
+    
+    <!-- set the first frame -->
+    calc(caller.crop, '0|0|' + framewidth + '|' + frameheight);
+    
+    <!-- do the animation -->
+    setinterval(calc('crop_anim_' + caller.name), calc(1.0 / framerate),
+      if(caller.loaded,
+        inc(frame);
+        if(frame GE frames, if(caller.onlastframe !== null, callwith(caller, onlastframe() ) ); set(frame,0); );
+        mod(xpos, frame, xframes);
+        div(ypos, frame, xframes);
+        Math.floor(ypos);
+        mul(xpos, framewidth);
+        mul(ypos, frameheight);
+        calc(caller.crop, xpos + '|' + ypos + '|' + framewidth + '|' + frameheight);
+        ,
+        <!-- stop the interval when the hotspot gets removed -->
+        clearinterval(calc('crop_anim_' + caller.name));
+      );
+    );
+  </action>
+
+
+
+<!-- 准备设计师开始 -->
+
+  <plugin name="pp_blur" keep="true"
+    url="plugins/pp_blur.js"
+    enabled="true"
+    range="0.0"
+    linearrgb="false"
+    order="1"
+    phase="2"
+    />
+
+
+  <style name="infospot"
+    type="text"
+    css="color:#FFFFFF; font-size:16px; font-weight:bold; text-align:center;"
+    width="80" height="80"
+    bgroundedge="42"
+    bgalpha="0.75"
+    bgcolor="0x555555"
+    bgborder="1 0xFFFFFF 1"
+    bgshadow="0 0 16 0x0 0.5"
+    txtshadow="0 0 3 0x0 1.0"
+    mergedalpha="false"
+    vcenter="true"
+    oversampling="2"
+    mipmapping="true"
+    zoom="true"
+    capture="false"
+    />
+
+  <action name="popup" scope="private:POPUP" args="type, content, content2, width, height, scrollbars"><![CDATA[
+    if(popup, break(); );
+
+
+
+    
+    addlayer('popup_bg', popup_bg);
+    set(popup_bg,
+      type=container,
+      align=lefttop, width=100%, height=100%,
+      zorder=9999,
+      handcursor=false,
+      bgcapture=true,
+      capture=false,
+      //bgcolor=0x123456, onloaded='tween(bgalpha,0.3,1.0);', // optional: colorize the background
+      ondown='popup_close()'
+    );
+      
+    
+    addlayer('popup', popup);
+    set(popup,
+      type=container,
+      parent='popup_bg',
+      width=calc(min(width,global.stagewidth*0.95)),
+      height=calc(min(height,global.stageheight*0.84)),
+      align=center,
+      bgborder='1 0x555555 1',
+      bgcolor=0x555555,
+      bgalpha=0.7,
+      bgshadow='0 10 20 0x000000 0.5',
+      bgcapture=true,
+      maskchildren=false,
+      capture=true,
+      handcursor=false,
+      alpha=0
+    );
+    
+    /*
+    // optional: add a close button
+    addlayer('popup_close_x', closex);
+    set(closex,
+      url='%CURRENTXML%/closex.png',
+      parent='popup',
+      align=righttop,
+      edge=center,
+      scale=0.5,
+      zorder=9999,
+      alpha=0.25,
+      onover='tween(alpha,1)',
+      onout='tween(alpha,0.25)',
+      ondown='tween(alpha,1)',
+      onup='tween(alpha,0.25)',
+      onclick='popup_close()'
+    );
+    */
+
+    if(type == 'html',
+      copy(popup.datacontent, content);
+      calc(popup.onloaded, 'add_html_code(get(datacontent),'+scrollbars+');');
+
+      ,type == 'iframe',
+      calc(popup.datacontent, '<iframe style="position:absolute;width:100%;height:100%;top:0px;left:0px;" src="'+content+'" frameborder="0" allowfullscreen></iframe>');
+      calc(popup.onloaded, 'add_html_code(get(datacontent),'+scrollbars+');');
+
+      ,type == 'image',
+      set(popup,
+        bgcolor=0xFFFFFF,
+        bgalpha=1,
+      );
+      addlayer("popup_image", img);
+      set(img,
+        url=get(content),
+        align=center,
+        width=-20, height=-20,
+        parent=get(popup.name),
+        onloaded='popup_imageloaded()'
+      );
+
+      addlayer("popup_image2", img);
+      set(img,
+        url=get(content2),
+        align=center,
+        width=-20, height=-20,
+        parent=get(popup.name),
+        alpha=0.0,
+        onloaded='popup_imageloaded()'
+      );
+
+      addlayer("slider_bg", slider_bg);
+      set(slider_bg,
+        url="plugins/slider_background.png",
+        align="bottom",
+        x="0",
+        y="-40",
+        handcursor="false",
+        width.mobile="80%",
+        scale.mobile="0.7",
+        maskchildren=true,
+        alpha="0.9",
+        parent=get(popup.name)
+      );
+      addlayer("slider_grip", slider_grip);
+      set("slider_grip",
+        url="plugins/slider_grip.png",
+        align="left",
+        edge="center",
+        parent=get(global.layer[slider_bg].name),
+        x="0",
+        alpha="1.0",
+         ondown="copy(drag_currentx, x); copy(drag_stagex, mouse.stagex);
+                 asyncloop(pressed,
+                   calc(newx, drag_currentx + (mouse.stagex - drag_stagex)); 
+                   clamp(newx, 0, get(layer[slider_bg].pixelwidth));
+                   copy(x, newx);
+                   setblend(calc(newx / layer[slider_bg].pixelwidth));
+                 );"
+      );
+  
+      
+
+      trace('layer');
+      trace(global.layer[popup_image2].alpha);
+      set(global.layer[popup_image2].alpha, 0.0);
+    );
+
+    tween(global.plugin[pp_blur].range, 40.0);
+    delayedcall(0.2, tween(global.layer[popup].alpha, 1.0); );
+
+    set(global.events[popup].onclick, popup_close() );
+    set(global.events[popup].onremovepano, popup_close() );
+  ]]></action>
+  
+
+  <!-- arguments: 1=htmlcode, 2=scrollbars -->
+  <action name="add_html_code" type="Javascript"><![CDATA[
+    var div = document.createElement("div");
+
+    // basic styles to fit into the layer size and allow scrolling:
+    div.style.width = "100%";
+    div.style.height = "100%";
+    div.style.boxSizing = "border-box";
+    div.style.overflow = args[2] == "true" ? "auto" : "hidden";
+
+    // allow text selection (optional):
+    div.style.webkitUserSelect =
+    div.style.MozUserSelect =
+    div.style.msUserSelect =
+    div.style.userSelect = "text";
+
+    function stopPropagation(e){ e.stopPropagation(); }
+    function preventDefault(e){ e.preventDefault(); }
+
+    // enable browsed-based mouse-wheel and touch-scrolling support:
+    div.addEventListener("wheel", stopPropagation, true);
+    div.addEventListener("mousewheel", stopPropagation, true);
+    div.addEventListener("DOMMouseScroll", stopPropagation, true);
+    div.addEventListener("touchstart", function(event){ if(krpano.device.ios && window.innerHeight == krpano.display.htmltarget.offsetHeight){ /* avoid the iOS 'overscrolling' for fullpage viewers */ var bs = document.body.parentNode.style; bs.position="fixed"; bs.top=0; bs.left=0; bs.right=0; bs.bottom=0; } krpano.control.preventTouchEvents = false; event.stopPropagation(); }, true);
+    div.addEventListener("touchend", function(event){ krpano.control.preventTouchEvents = true; event.stopPropagation(); }, true);
+    div.addEventListener("gesturestart", preventDefault, true);
+
+    // add the html code:
+    div.innerHTML = args[1];
+
+    // add the div to the layer element:
+    caller.sprite.appendChild(div);
+  ]]></action>
+
+  <action name="setblend">
+    set(blend1, %1);
+    sub(blend2, 1.0, %1);
+    copy(global.layer[popup_image2].alpha, blend1);
+    copy(global.layer[popup_image1].alpha, blend2);
+  
+  </action>
+  
+  <action name="popup_close">
+    set(global.plugin[popup_bg].enabled, false);
+    set(global.events[popup].name, null);
+    tween(global.plugin[pp_blur].range, 0.0);
+    tween(global.layer[popup_bg].bgalpha, 0.0, 0.25);
+    tween(global.layer[popup].alpha, 0.0, 0.25, default,
+      removelayer('popup_bg', true);
+      scope(private:POPUP, delete(popup); );
+    );
+  </action>
+
+
+  <action name="popup_imageloaded" scope="private:POPUP">
+    calc(imgw, caller.imagewidth + 20);
+    calc(imgh, caller.imageheight + 20);
+    calc(maxw, global.stagewidth*0.95);
+    calc(maxh, global.stageheight*0.84);
+    if(imgw GT maxw,
+      calc(imgh, round(imgh * maxw / imgw));
+      copy(imgw, maxw);
+    );
+    if(imgh GT maxh,
+      calc(imgw, round(imgw * maxh / imgh));
+      copy(imgh, maxh);
+    );
+
+    set(global.layer[get(caller.parent)], width=get(imgw), height=get(imgh) );
+  </action>
+
+  <action name="closemap">
+    set(state, get(layer[oiweuroikn].state));
+    
+    if (state == minimized,
+      set(layer[oiweuroikn].state, maximized);
+      ,
+
+      if(device.mobile,
+        tween(layer[oiweuroikn].scale, 0.3);
+        ,
+        tween(layer[oiweuroikn].scale, 0.5);
+      );
+      set(layer[oiweuroikn].state, minimized); 
+
+<!--      tween(layer[oiweuroikn].scale, 1.0);
+      set(layer[oiweuroikn].state, maximized);
+      ,
+      
+      tween(layer[oiweuroikn].scale, 0.5);
+      set(layer[oiweuroikn].state, minimized); -->
+    )
+    
+    
+  </action>
+<!-- 准备设计师结束 -->
+
+
+
+  <!-- bgcolor="0x4e8eed" -->
+
+  <combobox_design name="glas" margin="8" open_close_speed="0.25" >
+    <style name="combobox_container_style"
+      bgcolor="0xffca6e"
+      bgalpha="0.9"
+      bgborder="1 0x333333 0.5"
+      bgroundedge="0"
+      bgshadow="0 4 10 0x000000 0.3"
+      height="50"
+      />
+    <style name="combobox_marker_style"
+      css="color:0xFFFFFF; font-family:Arial; font-size:22px;"
+      alpha="0.9"
+      bg="false"
+      txtshadow="0 4 10 0x000000 0.3"
+      />
+    <style name="combobox_item_style"
+      css="color:0xFFFFFF; font-family:times; font-size:18px; text-align:left; "
+      padding="11"
+      bg="false"
+      bgborder="1 0x333333 0.0"
+      bgcolor="0xfcba03"
+      bgalpha="1"
+      bgroundedge="3"
+      onoveritem="set(bg,true); set(bgborder, '1 0x333333 0.5'); "
+      onoutitem="set(bg,false); set(bgborder, '1 0x333333 0.0'); "
+
+      />
+  </combobox_design>
+
+  <action name="move_box">
+    <!-- set(layer[cbsettings2].visible, false); -->
+    <!-- tween(layer[cbsettings2].x, -300, 1); -->
+  </action>
+  <action name="move_box_back">
+    <!-- set(layer[cbsettings2].visible, true); -->
+    <!-- tween(layer[cbsettings2].x, 0, 3); -->
+  </action>
+    
+  <!-- set(layer[combobox_item_style].parent.bgalpha, '0.9'); -->
+  <action name="change_box_bg">
+    <!-- trace("changebox"); -->
+    <!-- trace(%1); -->
+    <!-- set(layer[cbsettings].bgalpha, '0.9');
+    set(layer[cbsettings2].bgalpha, '0.5'); -->
+    set(layer[cbsettings].bgalpha, '0.9');
+    <!-- set(layer[cbsettings2].bgalpha, '0.9'); -->
+    <!-- trace(layer[%1].parent); -->
+  </action>
+  <action name="change_box_bg2">
+    <!-- set(layer[cbsettings].bgalpha, '0.5');
+    set(layer[cbsettings2].bgalpha, '0.9'); -->
+    set(layer[cbsettings].bgalpha, '0.9');
+    <!-- set(layer[cbsettings2].bgalpha, '0.9'); -->
+  </action>
+
+
+
+<!-- startup action - load the first scene -->
+  <action name="startup" autorun="onstart">
+    if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+    loadscene(get(startscene), null, MERGE);
+    if(startactions !== null, startactions() );
+  </action>
+
+  <autorotate enabled="true" waittime="0.0" speed="100.0" />
+
+    <layer name="intro" keep="true"
+    type="container"
+    width="100%"
+    height="100%"
+    bgcolor="0x000000"
+    bgalpha="0.8"
+    enabled="true"
+    bgcapture="true"
+    zorder="95"
+    onclick="intro_click()" 
+    onloaded="intro_loaded()"
+  >
+    autorotate.start();
+    <layer name="intro_logo" url="plugins/logo2.png" align="center" alpha="0.0" scale="1.0" y="-100" keep="true" enabled="false"
+    />
+    <layer name="intro_guide" url="plugins/look.png" align="center" alpha="0.0" scale="1.0" y="100" keep="true" enabled="false"
+    />
+    <layer name="intro_guide" url="plugins/look_mobile.png" devices="mobile" align="center" alpha="0.0" scale="1.0" y="100" keep="true" enabled="false"
+    />
+
+    <layer name="close_btn" 
+      url="plugins/close.png"
+      align="topright"
+      width="50"
+      height="50"
+      y="0"
+      scale="1.0"
+      enabled="false"
+      
+    />
+  </layer>
+
+  <action name="intro_click">
+    tween(layer[intro].alpha, 0);
+    set(layer[intro].visible, false);
+    autorotate.stop();
+  </action>
+
+  <action name="intro_loaded">
+    delayedcall( 0.8,
+      tween(layer[intro_logo].alpha, 1);
+      tween(layer[intro_guide].alpha, 1);
+    );
+  </action>
+
+
+<!--  
+  <scene name="scene_1_pano" title="1_pano" onstart="" thumburl="panos/1_pano.tiles/thumb.jpg" lat="" lng="" heading="">
+    
+    <control bouncinglimits="calc:image.cube ? true : false" />
+
+    <view hlookat="247.5" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+    <preview url="panos/1_pano.tiles/preview.jpg" />
+
+    <image prealign="0|247.5|0">
+      <cube url="panos/1_pano.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+    </image>
+    <hotspot name="scene_2_pano" style="hs_circle" ath="12.727" atv="-1.227" linkedscene="scene_2_pano" tag="Tag 2" />
+    <hotspot name="scene_3_pano" style="hs_circle" ath="76.896" atv="-0.965" linkedscene="scene_3_pano" tag="Tag 3" />
+
+  </scene>
+
+  <scene name="scene_2_pano" title="2_pano" onstart="" thumburl="panos/2_pano.tiles/thumb.jpg" lat="45.49191333" lng="-73.48775000" heading="247.5">
+    
+    <control bouncinglimits="calc:image.cube ? true : false" />
+
+    <view hlookat="247.5" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+    <preview url="panos/2_pano.tiles/preview.jpg" />
+
+    <image prealign="0|247.5|0">
+      <cube url="panos/2_pano.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+    </image>
+    <hotspot name="scene_1_pano" style="hs_circle" ath="-84.507" atv="-10.669" linkedscene="scene_1_pano" tag="Tag 1"/>
+    <hotspot name="scene_3_pano" style="hs_circle" ath="76.896" atv="-0.965" linkedscene="scene_3_pano" tag="Tag 123" />
+  </scene>
+
+  <scene name="scene_3_pano" title="3_pano" onstart="" thumburl="panos/3_pano.tiles/thumb.jpg" lat="45.49178833" lng="-73.48737833" heading="202.5">
+    
+    <control bouncinglimits="calc:image.cube ? true : false" />
+
+    <view hlookat="202.5" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+    <preview url="panos/3_pano.tiles/preview.jpg" />
+
+    <image prealign="0|202.5|0">
+      <cube url="panos/3_pano.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,768,1664" />
+    </image>
+    <hotspot name="spot1" style="skin_hotspotstyle" ath="157.248" atv="0.875" linkedscene="scene_2_pano" />
+
+  </scene>
+
+    <action name="startup">
+    if(startscene === null, copy(startscene,scene[0].name));
+    loadscene(get(startscene), null, MERGE);
+  </action> -->
+
+    
+
+
+
+    
+  
+
+  <!-- 顶部背景栏 -->
+  <layer name="top_bar" keep="true" 
+      type="container"
+      align="top"
+      bgshadow="0 0 30 100 0x000000 0.4"
+      width="100%"
+      height="80"
+      y="-140"
+      bgcolor="0x000000"
+      enabled="true"
+      bgcapture="true"
+  />
+
+    <!-- 加入选项到左边菜单 - 结束 -->
+
+
+<!-- textfield with information about the currently dragged hotspot -->
+  
+  <layer name="topbarfortext" keep="true" 
+    type="container"
+    align="topleft"
+    y="10"
+    x="0"
+    width="100%"
+    height="100"
+    bgalpha="0.0"
+    bgcolor="0x000000"
+    enabled="false"
+    alpha="1"
+    bgcapture="false"
+  >
+
+<!--   <plugin name="contacttext"
+          type="text"
+          html="name contact"
+          css="color:0xFFFFFF; font-family:Arial;  font-size: 10px; letter-spacing: 0px; word-spacing: 2px; color: #FFFFFF; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: uppercase;"
+          bgalpha="0.0"
+          alpha="1.0"
+          bgcapture="true"
+          padding="8" 
+          align="center" 
+          x="0" 
+          y="10"
+          width="200"
+          height="100"
+          bgcolor="0xFFFFFF"
+          enabled="false"
+          zorder="9999"
+  >
+</plugin> -->
+
+  <layer name="logodesk" 
+      url="plugins/logo2.png"
+      align="center"
+      width="500"
+      height="500"
+      y="50"
+      scale="0.5"
+      enabled="false"
+    />
+
+  <plugin name="toptext"
+          type="text"
+          html="drag the hotspots..."
+          css="color:0xFFFFFF; font-family:Arial;  font-size: 28px; letter-spacing: 0px; word-spacing: 2px; color: #FFFFFF; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: uppercase;"
+          bgalpha="0.0"
+          alpha="1.0"
+          bgcapture="true"
+          padding="8"
+          align="left" 
+          x="20" 
+          y="-10"
+          width="250"
+          height="100"
+          bgcolor="0xFFFFFF"
+          enabled="false"
+          zorder="9999"
+  >
+  <!-- trace("hi123"); -->
+    </plugin>
+
+  </layer>
+  <layer name="topbarfortext"
+    devices="mobile"
+    visible="false"
+    alpha="0.0"
+  />
+
+
+
+
+
+
+  <!-- 手机顶栏 开始 -->
+  <layer name="topbarmobile" 
+    keep="true" 
+    devices="mobile"
+    type="container"
+    width="100%"
+    height="10"
+    align="top"
+    alpha="1.0"
+    bgalpha="0.0"
+    bgcolor="0x000000"
+    enabled="true"
+  >
+    <layer name="logomobile" 
+      url="plugins/logo2.png"
+      align="center"
+      width="500"
+      height="500"
+      y="50"
+      scale="0.4"
+      enabled="false"
+    />
+    <plugin name="toptextmobile"
+          type="text"
+          html="drag the hotspots..."
+          css="color:0xFFFFFF; font-family:Arial;  font-size: 16px; letter-spacing: 0px; word-spacing: 2px; color: #FFFFFF; font-weight: 400; text-decoration: none; font-style: normal; font-variant: normal; text-transform: uppercase;"
+          bgalpha="0.0"
+          alpha="1.0"
+          bgcapture="true"
+          padding="8"
+          align="bottom" 
+          x="0" 
+          y="-120"
+          bgcolor="0xFFFFFF"
+          enabled="false"
+          zorder="9999"
+    >
+    <!-- trace("hi123"); -->
+      </plugin>
+  </layer>
+
+  <!-- 手机顶栏 结束 -->
+
+    <action name="iowejflksjdklf">
+    <!-- trace(title); -->
+    <!-- trace(%1); -->
+    <!-- trace(scene[%1].title); -->
+    calc(plugin[toptext].html, scene[%1].title);
+    calc(plugin[toptextmobile].html, scene[%1].title);
+  </action>
+
+
+  <!-- the 'tooltip' style - show the tooltip textfield and update its position as long as hovering -->
+  <style name="tooltip"
+         onover="copy(layer[tooltip].html, tooltip);
+                 set(layer[tooltip].visible, true);
+                 tween(layer[tooltip].alpha, 1.0, 0.5);
+                 asyncloop(hovering, copy(layer[tooltip].x,mouse.stagex); copy(layer[tooltip].y,mouse.stagey); );"
+         onout="tween(layer[tooltip].alpha, 0.0, 0.25, default, set(layer[tooltip].visible,false), copy(layer[tooltip].x,mouse.stagex); copy(layer[tooltip].y,mouse.stagey); );"
+         />
+    <!-- the 'tooltip' textfield -->
+  <layer name="tooltip" keep="true"
+         type="text"
+         parent="STAGE"
+         visible="false" alpha="0"
+         enabled="false"
+         align="lefttop"
+         edge="bottom"
+         oy="-2"
+         background="false" backgroundcolor="0xFFFFFF" backgroundalpha="1.0"
+         border="false" bordercolor="0x000000" borderalpha="1.0"
+         borderwidth="1.0" roundedge="0"
+         shadow="0.0" shadowrange="4.0" shadowangle="45" shadowcolor="0x000000" shadowalpha="1.0"
+         textshadow="1" textshadowrange="6.0" textshadowangle="90" textshadowcolor="0x000000" textshadowalpha="1.0"
+         css="text-align:center; color:#FFFFFF; font-family:Arial; font-weight:bold; font-size:14px;"
+         html=""
+         />
+
+
+  <!-- <display stereo="true" stereooverlap="0.0" /> -->
+  <action name="setstero">
+    set(display.stereo, %1);
+  </action>
+
+
+  <!-- PANORAMA POSITIONS -->
+  <style name="everpano3d_1living_room"  ox="380.3714738876" oy="0" oz="360.8783185582" linkedscene="scene_1living_room" />
+  <style name="everpano3d_2patio1"  ox="-121.5438875302" oy="0" oz="352.3223588439" linkedscene="scene_2patio1" />
+  <style name="everpano3d_3patio2"  ox="-512.0965921262" oy="0" oz="-9.0961790153" linkedscene="scene_3patio2" />
+  <style name="everpano3d_4kitchen"  ox="846.4543248041" oy="0" oz="198.9058935868" linkedscene="scene_4kitchen" />
+  <style name="everpano3d_5(c)bathroom"  ox="544.5375951795" oy="0" oz="-0.0669291202" linkedscene="scene_5(c)bathroom" />
+  <style name="everpano3d_6(c)bedroom1"  ox="-1.7597175409" oy="0" oz="-0.1712744696" linkedscene="scene_6(c)bedroom1" />
+  <style name="everpano3d_7(c)bedroom2"  ox="615.0698413493" oy="0" oz="-133.5012885958" linkedscene="scene_7(c)bedroom2" />
+  <style name="everpano3d_8aisle1"  ox="403.7147479647" oy="0" oz="14.6185297902" linkedscene="scene_8aisle1" />
+  <style name="everpano3d_9aisle2"  ox="384.2752376428" oy="0" oz="-136.5266863586" linkedscene="scene_9aisle2" />
+  <style name="everpano3d_10(m)bedroom"  ox="-299.5668041577" oy="0" oz="-162.7255267679" linkedscene="scene_10(m)bedroom" />
+  <style name="everpano3d_11(m)bathroom"  ox="147.0571087973" oy="0" oz="-210.1087364091" linkedscene="scene_11(m)bathroom" />
+  <!-- SCENES -->
+  <!-- model3d -->
+  <scene name="scene_model3d" autoload="true" type="model3d" title="dollhouse" onstart="initial_model3d_view(); iowejflksjdklf(scene_model3d);" thumburl="%VIEWER%/assets/model3d/snapshot.jpg" thumbSize="250,183">
+    <preview url="%VIEWER%/assets/model3d/preview.jpg" />
+    <image>
+      <sphere url="%VIEWER%/assets/model3d/texture.png" />
+      <depthmap url="%VIEWER%/assets/model3d/model.obj" rendermode="3dmodel" scale="1" textured="true" cull="front" waitforload="true" />
+    </image>
+  </scene>
+  <!-- 1living_room -->
+  <scene name="scene_1living_room" type="panorama" model="true" title="living_room" onstart="iowejflksjdklf(scene_1living_room);" alt="125" thumburl="assets/panos/1living_room.tiles/snapshot.jpg"  >
+    <view hlookat="226.58" vlookat="5.48" fov="119.92"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/1living_room.tiles/preview.jpg" />
+    <image style="everpano3D_1living_room" >
+      <cube url="%VIEWER%/assets/panos/1living_room.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="360.8783185582,0,-380.3714738876" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 2patio1 -->
+  <scene name="scene_2patio1" type="panorama" model="true" title="patio1" onstart="iowejflksjdklf(scene_2patio1);" alt="125" thumburl="assets/panos/2patio1.tiles/snapshot.jpg"  >
+    <view hlookat="0" vlookat="0" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/2patio1.tiles/preview.jpg" />
+    <image style="everpano3D_2patio1" >
+      <cube url="%VIEWER%/assets/panos/2patio1.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="352.3223588439,0,121.5438875302" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 3patio2 -->
+  <scene name="scene_3patio2" type="panorama" model="true" title="patio2" onstart="iowejflksjdklf(scene_3patio2);" alt="125" thumburl="assets/panos/3patio2.tiles/snapshot.jpg"  >
+    <view hlookat="0" vlookat="0" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/3patio2.tiles/preview.jpg" />
+    <image style="everpano3D_3patio2" >
+      <cube url="%VIEWER%/assets/panos/3patio2.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-9.0961790153,0,512.0965921262" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 4kitchen -->
+  <scene name="scene_4kitchen" type="panorama" model="true" title="kitchen" onstart="iowejflksjdklf(scene_4kitchen);" alt="125" thumburl="assets/panos/4kitchen.tiles/snapshot.jpg"  >
+    <view hlookat="0" vlookat="0" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/4kitchen.tiles/preview.jpg" />
+    <image style="everpano3D_4kitchen" >
+      <cube url="%VIEWER%/assets/panos/4kitchen.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="198.9058935868,0,-846.4543248041" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 5(c)bathroom -->
+  <scene name="scene_5(c)bathroom" type="panorama" model="true" title="(c)bathroom" onstart="iowejflksjdklf(scene_5(c)bathroom);" alt="125" thumburl="assets/panos/5(c)bathroom.tiles/snapshot.jpg"  >
+    <view hlookat="-180.97" vlookat="28.92" fov="132.79"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/5(c)bathroom.tiles/preview.jpg" />
+    <image style="everpano3D_5(c)bathroom" >
+      <cube url="%VIEWER%/assets/panos/5(c)bathroom.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-0.0669291202,0,-544.5375951795" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 6(c)bedroom1 -->
+  <scene name="scene_6(c)bedroom1" type="panorama" model="true" title="(c)bedroom1" onstart="iowejflksjdklf(scene_6(c)bedroom1);" alt="125" thumburl="assets/panos/6(c)bedroom1.tiles/snapshot.jpg"  >
+    <view hlookat="-94.74" vlookat="15.29" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/6(c)bedroom1.tiles/preview.jpg" />
+    <image style="everpano3D_6(c)bedroom1" >
+      <cube url="%VIEWER%/assets/panos/6(c)bedroom1.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-0.1712744696,0,1.7597175409" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 7(c)bedroom2 -->
+  <scene name="scene_7(c)bedroom2" type="panorama" model="true" title="(c)bedroom2" onstart="iowejflksjdklf(scene_7(c)bedroom2);" alt="125" thumburl="assets/panos/7(c)bedroom2.tiles/snapshot.jpg"  >
+    <view hlookat="-149.29" vlookat="7.91" fov="140.71"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/7(c)bedroom2.tiles/preview.jpg" />
+    <image style="everpano3D_7(c)bedroom2" >
+      <cube url="%VIEWER%/assets/panos/7(c)bedroom2.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-133.5012885958,0,-615.0698413493" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 8aisle1 -->
+  <scene name="scene_8aisle1" type="panorama" model="true" title="aisle1" onstart="iowejflksjdklf(scene_8aisle1);" alt="125" thumburl="assets/panos/8aisle1.tiles/snapshot.jpg"  >
+    <view hlookat="-449.98" vlookat="44.57" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/8aisle1.tiles/preview.jpg" />
+    <image style="everpano3D_8aisle1" >
+      <cube url="%VIEWER%/assets/panos/8aisle1.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="14.6185297902,0,-403.7147479647" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 9aisle2 -->
+  <scene name="scene_9aisle2" type="panorama" model="true" title="aisle2" onstart="iowejflksjdklf(scene_9aisle2);" alt="125" thumburl="assets/panos/9aisle2.tiles/snapshot.jpg"  >
+    <view hlookat="307.59" vlookat="15.65" fov="120.00"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/9aisle2.tiles/preview.jpg" />
+    <image style="everpano3D_9aisle2" >
+      <cube url="%VIEWER%/assets/panos/9aisle2.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-136.5266863586,0,-384.2752376428" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 10(m)bedroom -->
+  <scene name="scene_10(m)bedroom" type="panorama" model="true" title="(m)bedroom" onstart="iowejflksjdklf(scene_10(m)bedroom);" alt="125" thumburl="assets/panos/10(m)bedroom.tiles/snapshot.jpg"  >
+    <view hlookat="-149.70" vlookat="11.14" fov="143.06"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/10(m)bedroom.tiles/preview.jpg" />
+    <image style="everpano3D_10(m)bedroom" >
+      <cube url="%VIEWER%/assets/panos/10(m)bedroom.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-162.7255267679,0,299.5668041577" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+  <!-- 11(m)bathroom -->
+  <scene name="scene_11(m)bathroom" type="panorama" model="true" title="(m)bathroom" onstart="iowejflksjdklf(scene_11(m)bathroom);" alt="125" thumburl="assets/panos/11(m)bathroom.tiles/snapshot.jpg"  >
+    <view hlookat="227.29" vlookat="9.17" fov="136.34"  fovtype="MFOV" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+    <preview type="CUBESTRIP" url="%VIEWER%/assets/panos/11(m)bathroom.tiles/preview.jpg" />
+    <image style="everpano3D_11(m)bathroom" >
+      <cube url="%VIEWER%/assets/panos/11(m)bathroom.tiles/pano_%s.jpg" />
+      <depthmap  url="%VIEWER%/assets/model3d/model.obj" center="-210.1087364091,0,-147.0571087973" enabled="true" scale="1.0" />
+    </image>
+  </scene>
+</krpano>
+
+
+
+
+
+
